@@ -19,7 +19,8 @@ tags:
  ScrollView()//默认模式
  
 ```
-ScrollView(<#T##axes: Axis.Set##Axis.Set#>, showsIndicators: <#T##Bool#>, content: <#T##() -> _#>)```
+ScrollView(<#T##axes: Axis.Set##Axis.Set#>, showsIndicators: <#T##Bool#>, content: <#T##() -> _#>)
+```
 
 axes: Axis.Set -> 设置横向滚动还是纵向滚动
 纵向.vertical 横向.horizontal
