@@ -6,6 +6,7 @@ date:       2020-08-16
 author:     POt
 header-img: img/post-bg-kuaidi.jpg
 catalog: true
+category: blog
 tags:       
     -   
     -   
