@@ -23,6 +23,7 @@ tags:
 ```
 class Todo: ObservableObject{
     @Published var Todolist: [SingleTodo] //由SingleTodo 组成的数组
-    var count = 0  //存储TodoList到底有多少元素```
+    var count = 0  //存储TodoList到底有多少元素
+```
 
 **作为储存数据的类Todo，它需要实时更新，这样就需要ObservableObject 随时“盯紧” Todo类和 Todolist数组，只要更新就会找到所有应用这些的界面然后将所有界面刷新一遍**
