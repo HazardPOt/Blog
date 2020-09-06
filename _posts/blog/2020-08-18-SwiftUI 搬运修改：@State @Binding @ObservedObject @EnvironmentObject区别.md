@@ -1,7 +1,7 @@
 ---  
 layout:     post
 title:      搬运修改：@State @Binding @ObservedObject @EnvironmentObject区别
-subtitle:       搬运修改：@State @Binding @ObservedObject @EnvironmentObject区别
+description:       搬运修改：@State @Binding @ObservedObject @EnvironmentObject区别
 date:       2020-08-18
 author:     POt
 header-img: img/post-bg-kuaidi.jpg
