@@ -16,7 +16,8 @@ tags:
 常见类型： Form、List
 * NavigationView form
   eg：
-```NavigationView{
+```
+NavigationView{
             Form{
                 TextField("事项内容", text: self.$title)
                 TextField("事项内容", text: self.$title)
@@ -29,7 +30,8 @@ tags:
 * NavigationView List
 
 
-``` NavigationView{
+``` 
+NavigationView{
             List{
                 TextField("事项内容", text: self.$title)
                 TextField("事项内容", text: self.$title)
