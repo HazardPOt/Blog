@@ -18,7 +18,8 @@ tags:
 
 代码示例：
 
-```   @State var title: String = ""
+```
+@State var title: String = ""
     
     var body: some View {
         NavigationView{
