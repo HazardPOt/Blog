@@ -28,7 +28,6 @@ tags:
     var deleted: Bool = false
     **var id: Int = 0**
 }
-
 init(data: [SingleTodo]){
         self.Todolist = []
         for item in data{
