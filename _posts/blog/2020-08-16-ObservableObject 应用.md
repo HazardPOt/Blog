@@ -1,6 +1,6 @@
 ---  
 layout:     post
-title:      ObservableObject 应用
+title:      SwiftUI ObservableObject 应用
 subtitle:       ObservableObject 语法应用
 date:       2020-08-16
 author:     POt
