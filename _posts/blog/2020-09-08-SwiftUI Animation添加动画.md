@@ -14,9 +14,10 @@ tags:
 ---  
 
 # 隐式动画
+
 > 隐式动画通过 **.animation()** modifier 指定。每当视图的某个 animatable 参数改变时，SwiftUI 会动画化呈现旧值到新值的变化。这些 animatable 参数包括尺寸，偏移量，颜色，缩放值，等等。
 
-![](https://pic1.zhimg.com/v2-a3a5c897691e40ba2ea943976f8038c2_b.jpg)
+![](https://pic1.zhimg.com/v2-a3a5c897691e40ba2ea943976f8038c2_b.webp)
 
 常用:
 ```
@@ -43,9 +44,10 @@ VStack{
 ```
 
 # 显式动画
+
 > 显式动画通过 **withAnimation { ... }** 闭包指定。只有那些依赖 withAnimation 闭包中的值变化的参数才会被动画化。让我们举例说明：
 
-![](https://pic2.zhimg.com/v2-13dc3dbe1c1a120c66d4e16955d4671d_b.jpg)
+![](https://pic2.zhimg.com/v2-13dc3dbe1c1a120c66d4e16955d4671d_b.webp)
 
 代码示例：
 ```
