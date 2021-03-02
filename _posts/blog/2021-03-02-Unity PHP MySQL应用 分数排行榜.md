@@ -241,3 +241,64 @@ echo json_encode($arr);
 
 [^]: MySQL WorkBench 界面
 
+### 使用Redis缓存数据
+
+  因为请求数据库的操作非常缓慢，更不用说还需要排序，目前比较流行的是将MySQL数据库中的数据写入到Redis内存数据库中，方法如下：
+
+-   创建PHP脚本，uploadscore_redis.php
+
+  ```
+  <?php
+  $myHandler=mysqli_connect("localhost","root","Woshitudou0205","myscoresdb");
+  if(mysqli_connect_errno())
+  {
+      echo mysqli_connect_error();
+      die();
+      exit(0);
+  }
+  mysqli_query($myHandler,"set names utf8");
+  $UserID=mysqli_real_escape_string($myHandler,$_POST["name"]);
+  $hiscore=$_POST["score"];
+  
+  $sql="insert into hiscores value (NULL,'$UserID','$hiscore')";
+  mysqli_query($myHandler,$sql);
+  
+  //添加代码，将数据同时写入Redis中
+  $id=mysqli_insert_id($myHandler);//获取最后插入用户的ID
+  $redis=new Redis();
+  $redis->connect("127.0.0.1",6379);//连接到Redis
+  $redis->IPush("rankid",$id);
+  
+  //将用户数据写入Redis，键名是user.和ID编号的结合
+  $redis->hMSet("user.$id",array("id"=>$id,"name"=>$UserID,"score"=>$hiscore));
+  
+  mysqli_close($myHandler);
+  echo 'upload'.$UserID.":".$hiscore;
+  ?>
+  ```
+
+- 创建PHP脚本downloadscores_redis.php
+
+  ```
+  <?php
+  $redis=new Redis();
+  $redis->connect("127.0.0.1",6379);
+  //使用Redis的排序功能
+  $result=$redis->sort("rankid",array("BY"=>"user.*->score","SORT"=>"DESC","LIMIT"=>array(0,20),"GET"=>array('#',"user.*->name","user.*->score")));
+  //将从Redis查询出数据读入到$arr中
+  $arr=array();
+  for($i=0;$i<count($result);$i+=3)
+  {
+      $id=$result[$i];
+      $name=$result[$i+1];
+      $score=$result[$i+2];
+      $arr[$id]['id']=$id;
+      $arr[$id]['name']=$name;
+      $arr[$id]['score']=$score;
+  }
+  
+  echo json_encode($arr);
+  ?>
+  ```
+
+    其中，<u>参数rankid是键名</u>，**BY**决定了依赖什么数据进行排序，**SORT**表示排序方式，**LIMIT**表示排序数量，**GET**是排序后返回的数据。因为不再访问My SQL的数据库，性能会提高很多。
