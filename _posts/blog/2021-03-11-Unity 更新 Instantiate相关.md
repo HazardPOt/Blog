@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:     Unity Resources.Load之后为什么需要Instantiate？
-description:     Unity Resources.Load之后为什么需要Instantiate？
-date:     2021-02-17
+title:     Unity 更新 Instantiate相关
+description:     Unity 更新 Instantiate相关
+date:     2021-03-11
 author:     POt
 header-img:     img/post-bg-kuaidi.jpg
 catalog: true
@@ -15,7 +15,9 @@ tags:
 
 ---
 
-引用https://blog.csdn.net/zhoumf/article/details/106150330
+## Unity Resources.Load之后为什么需要Instantiate？
+
+   引用https://blog.csdn.net/zhoumf/article/details/106150330
 
 ​    一个是加载到内存里，一个是实例化到场景中
 
@@ -34,3 +36,39 @@ tags:
 ​    第二个GameObject instance是对prefab进行一个深度copy克隆到场景中然后从Instantiate的返回值中持有他的引用。
 
 ​    prefab和instance在C#层面是一个类型，因为场景中的物体和资源中的预设都是 GameObject 类型的。
+
+## 如何重复进行 Instantiate
+
+  需要用到 **InvokeRepeating()** 函数
+
+```
+InvokeRepeating(methodName: string, time: float, repeatRate: float): void;
+//methodName:方法名
+//time:多少秒后执行
+//repeatRate：重复执行间隔
+```
+
+
+
+实例：制作一个SpawnManager 物体生成器
+
+```
+    public Transform SpawnImg;
+    public GameObject m_prefab;
+    private float startDelay = 2;
+    private float repeatRate = 2;
+
+    void Start()
+    {
+        InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
+    }
+    
+    void SpawnObstacle()
+    {
+        Instantiate(m_prefab, SpawnImg.position, this.transform.rotation);
+    }
+```
+
+结果展示
+
+[![6tBc4O.png](https://s3.ax1x.com/2021/03/11/6tBc4O.png)](https://imgtu.com/i/6tBc4O)
